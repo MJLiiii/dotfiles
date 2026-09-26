@@ -1,0 +1,8 @@
+# Populate fpath and initialize completion before loading fzf-tab.
+zsh-users/zsh-completions kind:fpath path:src post:init-zsh-completions
+Aloxaf/fzf-tab
+
+# Prompt, suggestions, and highlighting (widget wrappers load after fzf-tab).
+spaceship-prompt/spaceship-prompt
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting

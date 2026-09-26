@@ -6,7 +6,8 @@ Personal development configs for macOS, centered on Neovim, Zsh, and keyboard-dr
 
 | Config | Purpose |
 | --- | --- |
-| [`.zshrc`](.zshrc) | Zinit plugins, Spaceship prompt, syntax highlighting, autosuggestions, and language toolchain paths |
+| [`.zshrc`](.zshrc) | Antidote initialization, completion settings, and language toolchain paths |
+| [`.zsh_plugins.txt`](.zsh_plugins.txt) | Zsh completions, fzf-tab, Spaceship prompt, autosuggestions, and fast syntax highlighting |
 | [`.zprofile`](.zprofile) | Homebrew environment, pyenv, elan, and optional OrbStack integration |
 | [`nvim/`](nvim/) | Modular Neovim configuration managed by lazy.nvim |
 | [`ghostty/config`](ghostty/config) | Ghostty with Rosé Pine Dawn, FiraCode Nerd Font, and a hidden macOS title bar |
@@ -23,7 +24,7 @@ Personal development configs for macOS, centered on Neovim, Zsh, and keyboard-dr
 Install [Homebrew](https://brew.sh/) and Apple's Command Line Tools if needed (`xcode-select --install`), then install the tools for the configs you intend to use:
 
 ```sh
-brew install neovim tmux rbenv pyenv ripgrep tree-sitter-cli lazygit gh
+brew install neovim tmux rbenv pyenv ripgrep tree-sitter-cli lazygit gh antidote fzf
 brew install --cask ghostty font-fira-code-nerd-font
 brew install --cask nikitabobko/tap/aerospace
 ```
@@ -40,7 +41,7 @@ git clone https://github.com/snuffred/dotfiles.git ~/dotfiles
 
 Review these machine-specific settings before linking:
 
-- **Shell:** `.zshrc` initializes `rbenv` and `pyenv`, adds Rust, Julia, and GHCup paths, and includes an absolute Antigravity IDE path. `.zprofile` adds elan and Homebrew paths. Adjust them for your installed toolchains and home directory.
+- **Shell:** `.zshrc` initializes `rbenv` and `pyenv`, adds Rust and GHCup paths, and loads Homebrew's antidote. `.zprofile` adds elan and Homebrew paths. Adjust them for your installed toolchains and home directory.
 - **Monitors:** `.aerospace.toml` assigns workspace `1` to `279p1` and workspace `3` to `Built-in`. Update or remove those assignments for your displays.
 - **Git:** `.gitconfig` contains my name and email, and credential helpers pointing to `/home/linuxbrew/.linuxbrew/bin/gh`. Set your own identity and helper path if you use it.
 
@@ -53,6 +54,7 @@ mkdir -p ~/.config
 
 ln -s ~/dotfiles/.zprofile ~/.zprofile
 ln -s ~/dotfiles/.zshrc ~/.zshrc
+ln -s ~/dotfiles/.zsh_plugins.txt ~/.zsh_plugins.txt
 ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/ghostty ~/.config/ghostty
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
@@ -69,7 +71,7 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 
 ### 4. Start the tools
 
-- Open a new login shell. Zinit installs itself and loads the configured plugins on first launch, which requires network access.
+- Open a new login shell. Antidote downloads the plugins listed in `~/.zsh_plugins.txt` on first launch, which requires network access, and generates `~/.zsh_plugins.zsh` for subsequent launches. Keep this generated file and plugin caches outside the repository. Run `antidote update` to update plugins and `brew upgrade antidote` to update the manager, then open a new shell.
 - Launch `nvim`. The config bootstraps lazy.nvim; let plugin installation finish, then use `:Mason` to inspect managed tools and `:checkhealth` to check the environment.
 - Launch Ghostty and AeroSpace. Grant AeroSpace Accessibility access when prompted so it can manage windows.
 - Start a new `tmux` session, or reload an existing one with `tmux source-file ~/.tmux.conf`.
