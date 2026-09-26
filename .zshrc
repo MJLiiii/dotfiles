@@ -44,3 +44,6 @@ export PATH="$HOME/.ghcup/bin:$PATH"
 
 # pyenv
 eval "$(pyenv init - zsh)"
+
+# Added by Antigravity IDE
+export PATH="/Users/snuffred/.antigravity-ide/antigravity-ide/bin:$PATH"
