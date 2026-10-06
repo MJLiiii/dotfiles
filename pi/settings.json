@@ -1,0 +1,14 @@
+{
+  "lastChangelogVersion": "1.0.2",
+  "deviceId": "d61b2597-5331-4057-a6c3-f00af5918f6a",
+  "defaultProvider": "opencode",
+  "defaultModel": "claude-opus-5-5",
+  "theme": "rosepine-dawn",
+  "packages": [
+    "npm:@inobit/pi-themes",
+    "npm:pi-subagents",
+    "npm:@janvitos/pi-plan-build",
+    "npm:pi-web-access",
+    "https://github.com/ayghri/i-have-adhd"
+  ]
+}

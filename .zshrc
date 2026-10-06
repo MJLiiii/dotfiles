@@ -25,3 +25,6 @@ export PATH="$HOME/.ghcup/bin:$PATH"
 
 # pyenv
 eval "$(pyenv init - zsh)"
+
+# story-to-handdrawn-video
+export STORY_VIDEO_PROJECT="~/Repository/story-to-handdrawn-video"
