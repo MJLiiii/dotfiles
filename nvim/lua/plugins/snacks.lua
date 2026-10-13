@@ -142,26 +142,34 @@ return {
 		{ "gI", pick("lsp_implementations"), desc = "Goto Implementation" },
 		{ "gy", pick("lsp_type_definitions"), desc = "Goto Type Definition" },
 
-		-- unprefixed: terminal. mode "t" as well: snacks opens the terminal in terminal-mode (its
+		-- unprefixed: terminals. mode "t" as well: snacks opens the terminal in terminal-mode (its
 		-- interactive default) and lazy's keys are normal-mode only unless told otherwise, so the key that
 		-- opened the window could not hide it. toggle() hides the window but keeps the buffer and shell;
 		-- it re-derives the terminal id from v:count1 and getcwd(0) exactly like the normal-mode press.
+		--
+		-- <c-/> and <c-_> are two independent shells, docked right and bottom. The id is built from
+		-- cmd, cwd, env and count only (snacks/terminal.lua M.tid) -- win.position is not part of it,
+		-- so without something else differing both keys would toggle one and the same terminal. The
+		-- env entry is that difference; its only side effect is $NVIM_TERM_DOCK in the right-hand shell.
+		--
+		-- Only a terminal speaking the kitty keyboard protocol tells the two keys apart. Anywhere else
+		-- (tmux without extended-keys included) Ctrl+/ arrives as 0x1f = <c-_>, so it opens the bottom
+		-- terminal and <c-/> cannot be typed at all.
 		{
 			"<c-/>",
 			function()
-				Snacks.terminal.toggle()
+				Snacks.terminal.toggle(nil, { env = { NVIM_TERM_DOCK = "right" }, win = { position = "right" } })
 			end,
 			mode = { "n", "t" },
-			desc = "Toggle Terminal",
+			desc = "Toggle Terminal (Right)",
 		},
-		-- legacy encoding of Ctrl+/: many terminals send 0x1f (<c-_>) without the kitty keyboard protocol
 		{
 			"<c-_>",
 			function()
 				Snacks.terminal.toggle()
 			end,
 			mode = { "n", "t" },
-			desc = "Toggle Terminal",
+			desc = "Toggle Terminal (Bottom)",
 		},
 	},
 }

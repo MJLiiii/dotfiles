@@ -7,4 +7,5 @@ vim.g.maplocalleader = "\\" -- Nvim's default, stated explicitly: lean.nvim bind
 
 require("core.options")
 require("core.keymaps")
+require("core.autocmds")
 require("core.lazy")

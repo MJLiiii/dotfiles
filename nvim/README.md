@@ -23,8 +23,8 @@ mason packages and must be on `PATH`:
 
 | Path | Contents |
 |---|---|
-| `init.lua` | leader keys, then `core.options` → `core.keymaps` → `core.lazy` |
-| `lua/core/` | editor options and plugin-independent keymaps |
+| `init.lua` | leader keys, then `core.options` → `core.keymaps` → `core.autocmds` → `core.lazy` |
+| `lua/core/` | editor options, plugin-independent keymaps and autocmds |
 | `lua/plugins/` | one lazy.nvim spec per plugin; a plugin's keymaps live in its spec |
 | `after/lsp/<server>.lua` | per-server overrides, deep-merged on top of nvim-lspconfig's defaults |
 
@@ -48,6 +48,7 @@ window; `<leader>sk` lists every mapping with its description.
 | `<leader>x` | trouble lists |
 | `<leader>u` | UI toggles, notifications, colorschemes |
 | `g*` | LSP navigation (`gd`, `gD`, `gr`, `gI`, `gy`) |
-| `s*` | window splits (`sv`, `sh`, `sc`, `so`) |
-| `<C-hjkl>` | window focus; `<C-arrows>` resize |
+| `s*` | window splits (`sv`, `sh`, `sc`, `so`); `st` turns the window into a `:terminal` |
+| `<C-hjkl>` | window focus, from terminal-mode too; `<C-arrows>` resize |
+| `<C-/>` / `<C-_>` | toggle the right / bottom terminal; `<Esc><Esc>` leaves terminal-mode |
 | `<LocalLeader>` | lean.nvim in Lean buffers |
