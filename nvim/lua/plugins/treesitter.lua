@@ -16,6 +16,8 @@ return {
 			"python",
 			"haskell",
 			"lua",
+			-- leetcode.nvim uses this to format question descriptions
+			"html",
 			-- Neovim bundles parsers for these, but nvim-treesitter ships its own queries
 			-- for them too. Its queries sit earlier on 'runtimepath' than $VIMRUNTIME, so
 			-- they would be run against Neovim's older bundled parsers. Installing them
@@ -34,7 +36,7 @@ return {
 		-- a second call on the same tree returns the existing highlighter, see
 		-- vim.treesitter.highlighter.new.)
 		vim.api.nvim_create_autocmd("FileType", {
-			group = vim.api.nvim_create_augroup("_treesitter", {}),
+			group = vim.api.nvim_create_augroup("user_treesitter", { clear = true }),
 			callback = function(args)
 				local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
 				if lang and vim.treesitter.language.add(lang) then

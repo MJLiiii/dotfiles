@@ -1,6 +1,6 @@
--- LSP servers. This file owns the server list: mason installs and enables `mason_servers`; the
--- two servers installed outside mason (vsrocqtop from opam, haskell-language-server-wrapper from
--- ghcup) are enabled by hand in config(). Lean is handled entirely by lean.nvim (see lean.lua).
+-- LSP servers. This file owns the server lists: mason installs and enables `mason_servers`, while
+-- `external_servers` contains servers installed outside mason and enabled by config(). Lean is
+-- handled entirely by lean.nvim (see lean.lua).
 --
 -- Per-server overrides live in after/lsp/<name>.lua, deep-merged on top of nvim-lspconfig's
 -- lsp/<name>.lua (per key, so upstream keys you do not mention survive); an explicit
@@ -11,21 +11,16 @@
 -- lean); conform/lint cover more filetypes because formatting and linting are cheap to add;
 -- treesitter.lua states its own parser rule.
 
--- Servers mason installs and enables for us. Shared by both options below so they cannot drift.
+-- Keep both lists here so adding a language does not require editing the setup logic.
 local mason_servers = { "lua_ls", "clangd", "pyright" }
+local external_servers = { "vsrocq", "hls" }
 
 return {
 	"mason-org/mason-lspconfig.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		-- The one place mason is configured; conform.lua and lint.lua list it by name only.
-		-- cmd = ... so :Mason exists before a file is opened (mason creates its commands inside
-		-- setup(), and mason.nvim ships no plugin/ directory of its own).
-		{
-			"mason-org/mason.nvim",
-			cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonUpdate", "MasonLog" },
-			opts = {},
-		},
+		-- Shared Mason setup lives in mason.lua; conform.lua and lint.lua use it too.
+		"mason-org/mason.nvim",
 		"neovim/nvim-lspconfig",
 		"saghen/blink.cmp",
 	},
@@ -44,6 +39,6 @@ return {
 		require("mason-lspconfig").setup(opts)
 		-- vsrocqtop comes from opam; haskell-language-server-wrapper comes from ghcup.
 		-- Neither is a mason package. See after/lsp/{vsrocq,hls}.lua.
-		vim.lsp.enable({ "vsrocq", "hls" })
+		vim.lsp.enable(external_servers)
 	end,
 }

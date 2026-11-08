@@ -1,5 +1,5 @@
 -- Lint on BufEnter/BufWritePost/InsertLeave (nvim-lint); linters are installed by mason-nvim-lint
--- from the table below. mason itself is configured in lua/plugins/lsp.lua.
+-- from the table below. Mason itself is configured in lua/plugins/mason.lua.
 return {
 	"mfussenegger/nvim-lint",
 	-- BufReadPost (lsp/conform use BufReadPre): no practical difference here, BufEnter still

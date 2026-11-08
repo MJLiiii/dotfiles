@@ -1,5 +1,5 @@
 -- Format on save (conform.nvim); formatters are installed by mason-conform from the table below.
--- mason itself is configured in lua/plugins/lsp.lua.
+-- Mason itself is configured in lua/plugins/mason.lua.
 
 -- prettierd when available, plain prettier otherwise; never both (stop_after_first). One table
 -- shared by six filetypes below (conform only reads it), so an edit here cannot miss a copy.
@@ -17,7 +17,7 @@ return {
 				require("conform").format({ async = true, lsp_format = "fallback" })
 			end,
 			mode = { "n", "x" },
-			desc = "Format Buffer",
+			desc = "Format Buffer / Selection",
 		},
 	},
 	dependencies = {

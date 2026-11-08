@@ -2,9 +2,9 @@ local map = vim.keymap.set
 
 map("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
 
--- <leader>n is free again (Notification History moved to <leader>un, lua/plugins/snacks.lua), so
--- <leader>nh fires without a 'timeoutlen' wait. Both this map and <leader>ur clear 'hlsearch';
--- this one is kept for muscle memory, <leader>ur also redraws.
+-- <leader>n is free again: Notification History moved to <leader>un in
+-- lua/config/snacks_keymaps.lua, so <leader>nh fires without a 'timeoutlen' wait. Both this map
+-- and <leader>ur clear 'hlsearch'; this one is kept for muscle memory, <leader>ur also redraws.
 map("n", "<leader>nh", "<cmd>nohlsearch<cr>", { desc = "Clear Search Highlights" })
 
 -- s* = window splits. This shadows built-in s (substitute char): s alone now waits 'timeoutlen'.
